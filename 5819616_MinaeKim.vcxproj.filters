@@ -15,10 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RecTreeTraversal.c">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="0910.c">
+    <ClCompile Include="0912.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
