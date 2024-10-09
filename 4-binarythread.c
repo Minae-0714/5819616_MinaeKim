@@ -9,7 +9,7 @@ typedef struct tree_node {
 typedef struct thread_tree_node {
     int data;
     struct thread_tree_node* right, * left;
-    int rightThread;  
+    int rightThread;
 } ThreadTree;
 
 TreeNode* insert_node(TreeNode* root, int key);
@@ -18,7 +18,6 @@ TreeNode* GenerateBinaryTree(int inputData[], int size);
 ThreadTree* GenerateThreadTree(int inputData[], int size);
 void BinaryTreeInOrder(TreeNode* root);
 void ThreadTreeInOrder(ThreadTree* root);
-ThreadTree* create_threads(ThreadTree* root);
 
 TreeNode* new_node(int key) {
     TreeNode* temp = malloc(sizeof(TreeNode));
@@ -31,7 +30,7 @@ ThreadTree* new_thread_node(int key) {
     ThreadTree* temp = malloc(sizeof(ThreadTree));
     temp->data = key;
     temp->right = temp->left = NULL;
-    temp->rightThread = 0;
+    temp->rightThread = 0; 
     return temp;
 }
 
@@ -48,7 +47,6 @@ ThreadTree* GenerateThreadTree(int inputData[], int size) {
     for (int i = 0; i < size; i++) {
         root = insert_thread_node(root, inputData[i]);
     }
-    root = create_threads(root); 
     return root;
 }
 
@@ -72,20 +70,6 @@ ThreadTree* insert_thread_node(ThreadTree* root, int key) {
     return root;
 }
 
-ThreadTree* create_threads(ThreadTree* root) {
-    static ThreadTree* prev = NULL;
-    if (root != NULL) {
-        create_threads(root->left);
-        if (prev != NULL && prev->right == NULL) {
-            prev->right = root;
-            prev->rightThread = 1;
-        }
-        prev = root;
-        create_threads(root->right);
-    }
-    return root;
-}
-
 void BinaryTreeInOrder(TreeNode* root) {
     if (root != NULL) {
         BinaryTreeInOrder(root->left);
@@ -95,31 +79,21 @@ void BinaryTreeInOrder(TreeNode* root) {
 }
 
 void ThreadTreeInOrder(ThreadTree* root) {
-    ThreadTree* current = root;
-
-    while (current->left != NULL)
-        current = current->left;
-
-    while (current != NULL) {
-        printf("%d ", current->data);
-
-        if (current->rightThread)
-            current = current->right;
-        else {
-            current = current->right;
-            while (current != NULL && current->left != NULL)
-                current = current->left;
-        }
+    if (root != NULL) {
+        ThreadTreeInOrder(root->left);
+        printf("%d ", root->data);
+        ThreadTreeInOrder(root->right);
     }
 }
 
 int main() {
     int inputData[] = { 4, 1, 9, 13, 15, 3, 6, 14, 7, 10, 12, 2, 5, 8, 11 };
-    int size = sizeof(inputData) / sizeof(inputData[0]);
+    int size = sizeof(inputData) / sizeof(inputData[0]); // 배열 크기 계산
 
     TreeNode* root = GenerateBinaryTree(inputData, size);
     printf("Binary tree inorder: ");
     BinaryTreeInOrder(root);
+
     printf("\n");
 
     ThreadTree* troot = GenerateThreadTree(inputData, size);
