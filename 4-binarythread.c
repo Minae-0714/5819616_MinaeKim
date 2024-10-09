@@ -1,17 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// 일반 이진트리 노드 구조체
 typedef struct tree_node {
     int data;
     struct tree_node* right, * left;
 } TreeNode;
 
-// 스레드 이진트리 노드 구조체
 typedef struct thread_tree_node {
     int data;
     struct thread_tree_node* right, * left;
-    int rightThread;  // 스레드 여부를 표시 (1: 스레드, 0: 자식 노드)
+    int rightThread;  
 } ThreadTree;
 
 TreeNode* insert_node(TreeNode* root, int key);
@@ -37,7 +35,6 @@ ThreadTree* new_thread_node(int key) {
     return temp;
 }
 
-// 일반 이진트리 생성
 TreeNode* GenerateBinaryTree(int inputData[], int size) {
     TreeNode* root = NULL;
     for (int i = 0; i < size; i++) {
@@ -46,17 +43,15 @@ TreeNode* GenerateBinaryTree(int inputData[], int size) {
     return root;
 }
 
-// 스레드 이진트리 생성
 ThreadTree* GenerateThreadTree(int inputData[], int size) {
     ThreadTree* root = NULL;
     for (int i = 0; i < size; i++) {
         root = insert_thread_node(root, inputData[i]);
     }
-    root = create_threads(root); // 스레드 연결 생성
+    root = create_threads(root); 
     return root;
 }
 
-// 이진트리 노드 삽입
 TreeNode* insert_node(TreeNode* root, int key) {
     if (root == NULL)
         return new_node(key);
@@ -67,7 +62,6 @@ TreeNode* insert_node(TreeNode* root, int key) {
     return root;
 }
 
-// 스레드 이진트리 노드 삽입
 ThreadTree* insert_thread_node(ThreadTree* root, int key) {
     if (root == NULL)
         return new_thread_node(key);
@@ -78,14 +72,13 @@ ThreadTree* insert_thread_node(ThreadTree* root, int key) {
     return root;
 }
 
-// 중위 순회를 통해 스레드 연결 생성
 ThreadTree* create_threads(ThreadTree* root) {
     static ThreadTree* prev = NULL;
     if (root != NULL) {
         create_threads(root->left);
         if (prev != NULL && prev->right == NULL) {
             prev->right = root;
-            prev->rightThread = 1;  // 스레드 표시
+            prev->rightThread = 1;  
         }
         prev = root;
         create_threads(root->right);
@@ -93,7 +86,6 @@ ThreadTree* create_threads(ThreadTree* root) {
     return root;
 }
 
-// 중위 순회(재귀) - 일반 이진트리
 void BinaryTreeInOrder(TreeNode* root) {
     if (root != NULL) {
         BinaryTreeInOrder(root->left);
@@ -102,22 +94,17 @@ void BinaryTreeInOrder(TreeNode* root) {
     }
 }
 
-// 중위 순회(반복) - 스레드 이진트리
 void ThreadTreeInOrder(ThreadTree* root) {
     ThreadTree* current = root;
 
-    // 가장 왼쪽 노드로 이동
     while (current->left != NULL)
         current = current->left;
 
     while (current != NULL) {
         printf("%d ", current->data);
-
-        // 스레드가 있으면 스레드 따라 이동
         if (current->rightThread)
             current = current->right;
         else {
-            // 오른쪽 서브트리의 가장 왼쪽 노드로 이동
             current = current->right;
             while (current != NULL && current->left != NULL)
                 current = current->left;
@@ -129,15 +116,13 @@ int main() {
     int inputData[] = { 4, 1, 9, 13, 15, 3, 6, 14, 7, 10, 12, 2, 5, 8, 11 };
     int size = sizeof(inputData) / sizeof(inputData[0]);
 
-    // 일반 이진탐색 트리 생성
     TreeNode* root = GenerateBinaryTree(inputData, size);
     printf("Binary tree inorder: ");
     BinaryTreeInOrder(root);
     printf("\n");
 
-    // 스레드 이진트리 생성
     ThreadTree* troot = GenerateThreadTree(inputData, size);
-    printf("Thread tree inorder (iterative): ");
+    printf("Thread tree inorder: ");
     ThreadTreeInOrder(troot);
 
     free(root);
