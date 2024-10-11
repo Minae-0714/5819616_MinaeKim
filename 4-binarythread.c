@@ -10,15 +10,15 @@ typedef struct thread_tree_node {
     int data;
     struct thread_tree_node* right, * left;
     int rightThread;  
-} ThreadTree;
+} ThreadNode;
 
 TreeNode* insert_node(TreeNode* root, int key);
-ThreadTree* insert_thread_node(ThreadTree* root, int key);
+ThreadNode* insert_thread_node(ThreadNode* root, int key);
 TreeNode* GenerateBinaryTree(int inputData[], int size);
-ThreadTree* GenerateThreadTree(int inputData[], int size);
+ThreadNode* GenerateThreadTree(int inputData[], int size);
 void BinaryTreeInOrder(TreeNode* root);
-void ThreadTreeInOrder(ThreadTree* root);
-ThreadTree* create_threads(ThreadTree* root);
+void ThreadTreeInOrder(ThreadNode* root);
+ThreadNode* create_threads(ThreadNode* root);
 
 TreeNode* new_node(int key) {
     TreeNode* temp = malloc(sizeof(TreeNode));
@@ -27,8 +27,8 @@ TreeNode* new_node(int key) {
     return temp;
 }
 
-ThreadTree* new_thread_node(int key) {
-    ThreadTree* temp = malloc(sizeof(ThreadTree));
+ThreadNode* new_thread_node(int key) {
+    ThreadNode* temp = malloc(sizeof(ThreadNode));
     temp->data = key;
     temp->right = temp->left = NULL;
     temp->rightThread = 0;
@@ -43,8 +43,8 @@ TreeNode* GenerateBinaryTree(int inputData[], int size) {
     return root;
 }
 
-ThreadTree* GenerateThreadTree(int inputData[], int size) {
-    ThreadTree* root = NULL;
+ThreadNode* GenerateThreadTree(int inputData[], int size) {
+    ThreadNode* root = NULL;
     for (int i = 0; i < size; i++) {
         root = insert_thread_node(root, inputData[i]);
     }
@@ -62,7 +62,7 @@ TreeNode* insert_node(TreeNode* root, int key) {
     return root;
 }
 
-ThreadTree* insert_thread_node(ThreadTree* root, int key) {
+ThreadNode* insert_thread_node(ThreadNode* root, int key) {
     if (root == NULL)
         return new_thread_node(key);
     if (root->data == key) return root;
@@ -72,8 +72,8 @@ ThreadTree* insert_thread_node(ThreadTree* root, int key) {
     return root;
 }
 
-ThreadTree* create_threads(ThreadTree* root) {
-    static ThreadTree* prev = NULL;
+ThreadNode* create_threads(ThreadNode* root) {
+    static ThreadNode* prev = NULL;
     if (root != NULL) {
         create_threads(root->left);
         if (prev != NULL && prev->right == NULL) {
@@ -94,8 +94,8 @@ void BinaryTreeInOrder(TreeNode* root) {
     }
 }
 
-void ThreadTreeInOrder(ThreadTree* root) {
-    ThreadTree* current = root;
+void ThreadTreeInOrder(ThreadNode* root) {
+    ThreadNode* current = root;
 
     while (current->left != NULL)
         current = current->left;
@@ -121,7 +121,7 @@ int main() {
     BinaryTreeInOrder(root);
     printf("\n");
 
-    ThreadTree* troot = GenerateThreadTree(inputData, size);
+    ThreadNode* troot = GenerateThreadTree(inputData, size);
     printf("Thread tree inorder: ");
     ThreadTreeInOrder(troot);
 
