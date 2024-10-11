@@ -4,10 +4,11 @@
 #define MAX_SIZE 100
 
 typedef struct {
-    int data[MAX_SIZE];
+    int data[MAX_SIZE]; //힙 배열 (data)
     int heap_size;
 } HeapType;
 
+//Heapify (힙 정렬) 맨 처음 배열에 있는 데이터들 정렬
 void Heapify(HeapType* h, int index) {
     int largest = index;
     int leftChild = 2 * index + 1;
@@ -36,27 +37,31 @@ void BuildMaxHeap(HeapType* h) {
     }
 }
 
+//Heap에 새로운 노드 삽입
 void InsertMaxHeapTree(HeapType* root, int value) {
     if (root->heap_size >= MAX_SIZE) {
         printf("Heap is full.\n");
         return;
     }
 
+    //새로운 노드 마지막에 추가
     int i = root->heap_size++;
     root->data[i] = value;
 
-    int moveCount = 0; 
+    int moveCount = 0; //이동횟수
 
     for (int j = 0; j < root->heap_size; j++) {
         printf("%d ", root->data[j]);
     }
     printf("\n");
 
+    //노드 정렬
     while (i != 0 && root->data[i] > root->data[(i - 1) / 2]) {
         int temp = root->data[i];
         root->data[i] = root->data[(i - 1) / 2];
         root->data[(i - 1) / 2] = temp;
 
+        //인덱스 부모노드로
         i = (i - 1) / 2;
         moveCount++; 
 
@@ -69,23 +74,26 @@ void InsertMaxHeapTree(HeapType* root, int value) {
     printf("노드가 이동된 횟수: %d\n", moveCount);
 }
 
+//Heap의 루트노드 삭제
 int DeleteMaxHeapTree(HeapType* h) {
     if (h->heap_size == 0) {
         printf("Heap is empty.\n");
         return -1;
     }
 
+    //루트노드 저장
     int root = h->data[0];
     h->data[0] = h->data[--h->heap_size];
 
-    int current = 0;
-    int moveCount = 0; 
+    int current = 0; //현재노드
+    int moveCount = 0; //이동횟수
 
     for (int i = 0; i < h->heap_size; i++) {
         printf("%d ", h->data[i]);
     }
     printf("\n");
 
+    //노드 정렬
     while (2 * current + 1 < h->heap_size) {
         int largerChild = 2 * current + 1;
 
@@ -115,6 +123,7 @@ int DeleteMaxHeapTree(HeapType* h) {
     return root;
 }
 
+//Heap 출력
 void LevelOrderPrint(HeapType* h) {
     int level = 0;
     int levelCount = 1;
