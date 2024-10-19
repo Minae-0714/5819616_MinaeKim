@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BST", "..\BST\BST.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Heap", "..\Heap\Heap.vcxproj", "{C47093D4-9FFC-40BC-8766-52160EE7216D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graph", "..\Graph\Graph.vcxproj", "{1745FF2E-CE81-4EDB-AC7F-79A4EBF4FA69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -71,6 +73,14 @@ Global
 		{C47093D4-9FFC-40BC-8766-52160EE7216D}.Release|x64.Build.0 = Release|x64
 		{C47093D4-9FFC-40BC-8766-52160EE7216D}.Release|x86.ActiveCfg = Release|Win32
 		{C47093D4-9FFC-40BC-8766-52160EE7216D}.Release|x86.Build.0 = Release|Win32
+		{1745FF2E-CE81-4EDB-AC7F-79A4EBF4FA69}.Debug|x64.ActiveCfg = Debug|x64
+		{1745FF2E-CE81-4EDB-AC7F-79A4EBF4FA69}.Debug|x64.Build.0 = Debug|x64
+		{1745FF2E-CE81-4EDB-AC7F-79A4EBF4FA69}.Debug|x86.ActiveCfg = Debug|Win32
+		{1745FF2E-CE81-4EDB-AC7F-79A4EBF4FA69}.Debug|x86.Build.0 = Debug|Win32
+		{1745FF2E-CE81-4EDB-AC7F-79A4EBF4FA69}.Release|x64.ActiveCfg = Release|x64
+		{1745FF2E-CE81-4EDB-AC7F-79A4EBF4FA69}.Release|x64.Build.0 = Release|x64
+		{1745FF2E-CE81-4EDB-AC7F-79A4EBF4FA69}.Release|x86.ActiveCfg = Release|Win32
+		{1745FF2E-CE81-4EDB-AC7F-79A4EBF4FA69}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
