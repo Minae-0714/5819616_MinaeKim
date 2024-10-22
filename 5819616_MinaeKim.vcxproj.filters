@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="7-dfsbfs.c">
+    <ClCompile Include="8-findmst.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
