@@ -14,10 +14,10 @@ typedef struct GraphType {
 
 // 그래프 초기화 
 void graph_init(GraphType* g) {
-	g->n = 0; // 정점 개수 0으로 초기화
+	g->n = 0; // 정점 개수 초기화
 	for (int i = 0; i < MAX_VERTICES; i++) {
 		for (int j = 0; j < MAX_VERTICES; j++) {
-			g->weight[i][j] = INF; // 모든 가중치를 무한대(INF)로 설정
+			g->weight[i][j] = INF; // 간선 가중치 무한대
 		}
 	}
 }
@@ -25,6 +25,7 @@ void graph_init(GraphType* g) {
 int selected[MAX_VERTICES];
 int distance[MAX_VERTICES];
 
+// 최소 거리 정점 반환
 int get_min_vertex(int n) {
 	int v, i;
 	for (i = 0; i < n; i++) {
@@ -37,34 +38,35 @@ int get_min_vertex(int n) {
 	return(v);
 }
 
+// 간선 추가
 void insert_edge(GraphType* g, int u, int v, int w) {
 	if (u >= MAX_VERTICES || v >= MAX_VERTICES) {
 		printf("정점 번호가 너무 큽니다.\n");
 		return;
 	}
-	g->weight[u][v] = w; // u에서 v로 가는 간선의 가중치 설정
-	g->weight[v][u] = w; // v에서 u로 가는 간선의 가중치 설정 (무방향 그래프)
-	if (u >= g->n) g->n = u + 1; // 정점 개수 갱신
-	if (v >= g->n) g->n = v + 1; // 정점 개수 갱신
+	g->weight[u][v] = w; 
+	g->weight[v][u] = w;
+	if (u >= g->n) g->n = u + 1;
+	if (v >= g->n) g->n = v + 1;
 }
 
+// prim 알고리즘
 void FindPrimMST(GraphType* g) {
 	int i, u, v;
 
-	// distance와 selected 배열 초기화
+	// 배열 초기화
 	for (u = 0; u < g->n; u++) {
 		distance[u] = INF;
 		selected[u] = FALSE;
 	}
 
-	// 시작 정점의 거리 0으로 설정 (예: 0번 정점에서 시작)
+	// 시작 정점의 거리 0
 	distance[1] = 0;
 	printf("Prim MST Algorithm\n");
 
-	// Prim 알고리즘
 	for (i = 0; i < g->n; i++) {
-		u = get_min_vertex(g->n); // 최소 거리를 가지는 정점 선택
-		selected[u] = TRUE;       // 선택된 정점 표시
+		u = get_min_vertex(g->n); // 최소 거리 정점 선택
+		selected[u] = TRUE;      
 
 		if (distance[u] == INF) return; // 연결된 간선이 없으면 종료
 
@@ -79,6 +81,7 @@ void FindPrimMST(GraphType* g) {
 	}
 }
 
+// 그래프 생성
 void GenerateGraph(GraphType* g) {
 	insert_edge(g, 1, 6, 11);
 	insert_edge(g, 1, 7, 12);
@@ -107,7 +110,7 @@ int main(void) {
 	g = (GraphType*)malloc(sizeof(GraphType));
 	graph_init(g);
 
-	GenerateGraph(g); // 그래프 생성
+	GenerateGraph(g);
 
 	FindPrimMST(g);
 
