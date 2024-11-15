@@ -3,9 +3,9 @@
 #include <time.h>
 #define SIZE 100
 
-#define SWAP(x,y,t)((t)=(x),(x)=(y), (y)=(t)) // SWAP 매크로: 두 값을 교환
+#define SWAP(x,y,t)((t)=(x),(x)=(y), (y)=(t))
 
-// 배열에 랜덤 숫자 생성 (0 ~ 999)
+// 랜덤 숫자 생성
 void generateRandomData(int randomData[]) {
     for (int i = 0; i < SIZE; i++) {
         randomData[i] = rand() % 1000;
@@ -24,7 +24,7 @@ void print_sort(int randomData[]) {
 void doSelectionSort(int original[]) {
     int list[SIZE];
     for (int i = 0; i < SIZE; i++) {
-        list[i] = original[i]; // 원본 배열 복사
+        list[i] = original[i]; 
     }
     int j, least, temp;
     int final_step = 0;
@@ -46,7 +46,7 @@ void doSelectionSort(int original[]) {
             SWAP(list[i], list[least], temp);
         }
 
-        // 중간 단계 출력
+        // 출력
         if ((i + 11) % 10 == 0 && (i + 11) % 20 == 0) {
             printf("Step %d: ", i + 1);
             print_sort(list);
@@ -138,10 +138,10 @@ int main() {
     srand(time(0));
     int randomData[SIZE];
 
-    generateRandomData(randomData); // 랜덤 데이터 생성
-    doSelectionSort(randomData);    // 선택 정렬 실행
-    doInsertionSort(randomData);    // 삽입 정렬 실행
-    doBubbleSort(randomData);       // 버블 정렬 실행
+    generateRandomData(randomData); 
+    doSelectionSort(randomData);    
+    doInsertionSort(randomData);    
+    doBubbleSort(randomData);       
 
     return 0;
 }
