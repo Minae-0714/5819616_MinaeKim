@@ -83,7 +83,6 @@ void doInsertionSort(int original[]) {
     }
 
     printf("\n");
-    printf("Insertion Sort:\n");
 
     // 20번 실행하여 각 반복에서 새로운 랜덤 배열을 정렬
     for (int run = 0; run < 20; run++) { // 20번 실행
@@ -128,7 +127,7 @@ void doInsertionSort(int original[]) {
 
     // 평균 비교 횟수 출력
     printf("Insertion Sort Compare Average: %d\n", totalComparisons / 20);
-    printf("Final Insertion Sort Result (Sorted Array):\n");
+    printf("Insertion Sort Result:\n");
     print_sort(sortedArray); // 최종 정렬된 배열 출력
 }
 
@@ -144,7 +143,6 @@ void doBubbleSort(int original[]) {
     }
 
     printf("\n");
-    printf("Bubble Sort:\n");
 
     // 20번 실행하여 각 반복에서 새로운 랜덤 배열을 정렬
     for (int run = 0; run < 20; run++) { // 20번 실행
@@ -181,7 +179,7 @@ void doBubbleSort(int original[]) {
 
     // 평균 이동 횟수 출력
     printf("Bubble Sort Move Average: %d\n", totalMovements / 20);
-    printf("Final Bubble Sort Result (Sorted Array):\n");
+    printf("Bubble Sort Result:\n");
     print_sort(sortedArray); // 최종 정렬된 배열 출력
 }
 
