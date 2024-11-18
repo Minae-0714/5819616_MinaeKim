@@ -5,14 +5,14 @@
 
 #define SWAP(x,y,t)((t)=(x),(x)=(y), (y)=(t))
 
-// ·£´ı ¼ıÀÚ »ı¼º
+// ëœë¤ ìˆ«ì ìƒì„±
 void generateRandomData(int randomData[]) {
     for (int i = 0; i < SIZE; i++) {
         randomData[i] = rand() % 1000;
     }
 }
 
-// ¹è¿­ Ãâ·Â
+// ë°°ì—´ ì¶œë ¥
 void print_sort(int randomData[]) {
     for (int i = 0; i < SIZE; i++) {
         printf("%d ", randomData[i]);
@@ -20,11 +20,11 @@ void print_sort(int randomData[]) {
     printf("\n");
 }
 
-// ¼±ÅÃ Á¤·Ä
+// ì„ íƒ ì •ë ¬
 void doSelectionSort(int original[]) {
     int list[SIZE];
     for (int i = 0; i < SIZE; i++) {
-        list[i] = original[i]; 
+        list[i] = original[i];
     }
     int j, least, temp;
     int final_step = 0;
@@ -34,19 +34,19 @@ void doSelectionSort(int original[]) {
     for (int i = 0; i < SIZE - 1; i++) {
         least = i;
 
-        // ÇöÀç À§Ä¡ ÀÌÈÄ¿¡¼­ ÃÖ¼Ò°ª Ã£±â
+        // í˜„ì¬ ìœ„ì¹˜ ì´í›„ì—ì„œ ìµœì†Œê°’ ì°¾ê¸°
         for (j = i + 1; j < SIZE; j++) {
             if (list[least] > list[j]) {
                 least = j;
             }
         }
 
-        // ÃÖ¼Ò°ª°ú ÇöÀç À§Ä¡ °ª ±³È¯
+        // ìµœì†Œê°’ê³¼ í˜„ì¬ ìœ„ì¹˜ ê°’ êµí™˜
         if (least != i) {
             SWAP(list[i], list[least], temp);
         }
 
-        // Ãâ·Â
+        // ì¶œë ¥
         if ((i + 11) % 10 == 0 && (i + 11) % 20 == 0) {
             printf("Step %d: ", i + 1);
             print_sort(list);
@@ -55,7 +55,7 @@ void doSelectionSort(int original[]) {
 
         final_step = i;
 
-        // Á¤·Ä ¿Ï·á ¿©ºÎ È®ÀÎ
+        // ì •ë ¬ ì™„ë£Œ ì—¬ë¶€ í™•ì¸
         int isSortedCorrectly = 1;
         for (int i = 0; i < SIZE - 1; i++) {
             if (list[i] > list[i + 1]) {
@@ -66,27 +66,36 @@ void doSelectionSort(int original[]) {
         if (isSortedCorrectly == 1)
             break;
     }
-    // ¸¶Áö¸· ´Ü°è Ãâ·Â
+    // ë§ˆì§€ë§‰ ë‹¨ê³„ ì¶œë ¥
     printf("Step %d: ", final_step + 1);
     print_sort(list);
 }
 
-// »ğÀÔ Á¤·Ä
+// ì‚½ì… ì •ë ¬
 void doInsertionSort(int original[]) {
     int totalComparisons = 0;
     int list[SIZE];
 
-    for (int run = 0; run < 20; run++) { // 20¹ø ½ÇÇà
-        for (int i = 0; i < SIZE; i++) {
-            list[i] = original[i]; // ¿øº» ¹è¿­ º¹»ç
-        }
+    // ì›ë³¸ ë°°ì—´ì„ ë³µì‚¬í•˜ì—¬ ì •ë ¬ëœ ë°°ì—´ì„ ë§Œë“¦
+    int sortedArray[SIZE];
+    for (int i = 0; i < SIZE; i++) {
+        sortedArray[i] = original[i];
+    }
+
+    printf("\n");
+    printf("Insertion Sort:\n");
+
+    // 20ë²ˆ ì‹¤í–‰í•˜ì—¬ ê° ë°˜ë³µì—ì„œ ìƒˆë¡œìš´ ëœë¤ ë°°ì—´ì„ ì •ë ¬
+    for (int run = 0; run < 20; run++) { // 20ë²ˆ ì‹¤í–‰
+        generateRandomData(list); // ìƒˆ ëœë¤ ë°°ì—´ ìƒì„±
 
         int comparisons = 0;
+        // ì‚½ì… ì •ë ¬ ìˆ˜í–‰
         for (int i = 1; i < SIZE; i++) {
             int key = list[i];
             int j = i - 1;
 
-            // »ğÀÔ À§Ä¡ Å½»ö ¹× ÀÌµ¿
+            // ì‚½ì… ìœ„ì¹˜ íƒìƒ‰ ë° ì´ë™
             while (j >= 0 && list[j] > key) {
                 comparisons++;
                 list[j + 1] = list[j];
@@ -95,53 +104,96 @@ void doInsertionSort(int original[]) {
             comparisons++;
             list[j + 1] = key;
         }
-        totalComparisons += comparisons;
+
+        totalComparisons += comparisons; // ë¹„êµ íšŸìˆ˜ í•©ì‚°
     }
-    printf("\n");
-    // Æò±Õ ºñ±³ È½¼ö Ãâ·Â
+
+    // ì •ë ¬ëœ ì›ë³¸ ë°°ì—´ì„ ì‚½ì… ì •ë ¬ë¡œ ì •ë ¬
+    int comparisons = 0;
+    for (int i = 1; i < SIZE; i++) {
+        int key = sortedArray[i];
+        int j = i - 1;
+
+        // ì‚½ì… ìœ„ì¹˜ íƒìƒ‰ ë° ì´ë™
+        while (j >= 0 && sortedArray[j] > key) {
+            comparisons++;
+            sortedArray[j + 1] = sortedArray[j];
+            j--;
+        }
+        comparisons++;
+        sortedArray[j + 1] = key;
+    }
+
+    totalComparisons += comparisons; // ë¹„êµ íšŸìˆ˜ í•©ì‚°
+
+    // í‰ê·  ë¹„êµ íšŸìˆ˜ ì¶œë ¥
     printf("Insertion Sort Compare Average: %d\n", totalComparisons / 20);
-    printf("Insertion Sort Result:\n");
-    print_sort(list); // Á¤·Ä °á°ú Ãâ·Â
+    printf("Final Insertion Sort Result (Sorted Array):\n");
+    print_sort(sortedArray); // ìµœì¢… ì •ë ¬ëœ ë°°ì—´ ì¶œë ¥
 }
 
-// ¹öºí Á¤·Ä
+// ë²„ë¸” ì •ë ¬
 void doBubbleSort(int original[]) {
     int totalMovements = 0;
     int list[SIZE];
 
-    for (int run = 0; run < 20; run++) { // 20¹ø ½ÇÇà
-        for (int i = 0; i < SIZE; i++) {
-            list[i] = original[i]; // ¿øº» ¹è¿­ º¹»ç
-        }
+    // ì›ë³¸ ë°°ì—´ì„ ë³µì‚¬í•˜ì—¬ ì •ë ¬ëœ ë°°ì—´ì„ ë§Œë“¦
+    int sortedArray[SIZE];
+    for (int i = 0; i < SIZE; i++) {
+        sortedArray[i] = original[i];
+    }
+
+    printf("\n");
+    printf("Bubble Sort:\n");
+
+    // 20ë²ˆ ì‹¤í–‰í•˜ì—¬ ê° ë°˜ë³µì—ì„œ ìƒˆë¡œìš´ ëœë¤ ë°°ì—´ì„ ì •ë ¬
+    for (int run = 0; run < 20; run++) { // 20ë²ˆ ì‹¤í–‰
+        generateRandomData(list); // ìƒˆ ëœë¤ ë°°ì—´ ìƒì„±
 
         int movements = 0;
+        // ë²„ë¸” ì •ë ¬ ìˆ˜í–‰
         for (int i = 0; i < SIZE - 1; i++) {
             for (int j = 0; j < SIZE - i - 1; j++) {
-                // ÀÎÁ¢ÇÑ µÎ °ª ºñ±³ ÈÄ ±³È¯
+                // ì¸ì ‘í•œ ë‘ ê°’ ë¹„êµ í›„ êµí™˜
                 if (list[j] > list[j + 1]) {
                     int temp;
                     SWAP(list[j], list[j + 1], temp);
-                    movements += 3; // ±³È¯ ÀÛ¾÷À» 3¹ø ÀÌµ¿À¸·Î °£ÁÖ
+                    movements += 3; // êµí™˜ ì‘ì—…ì„ 3ë²ˆ ì´ë™ìœ¼ë¡œ ê°„ì£¼
                 }
             }
         }
-        totalMovements += movements;
+        totalMovements += movements; // ì´ë™ íšŸìˆ˜ í•©ì‚°
     }
-    printf("\n");
-    // Æò±Õ ÀÌµ¿ È½¼ö Ãâ·Â
+
+    // ì •ë ¬ëœ ì›ë³¸ ë°°ì—´ì„ ë²„ë¸” ì •ë ¬ë¡œ ì •ë ¬
+    int movements = 0;
+    for (int i = 0; i < SIZE - 1; i++) {
+        for (int j = 0; j < SIZE - i - 1; j++) {
+            // ì¸ì ‘í•œ ë‘ ê°’ ë¹„êµ í›„ êµí™˜
+            if (sortedArray[j] > sortedArray[j + 1]) {
+                int temp;
+                SWAP(sortedArray[j], sortedArray[j + 1], temp);
+                movements += 3; // êµí™˜ ì‘ì—…ì„ 3ë²ˆ ì´ë™ìœ¼ë¡œ ê°„ì£¼
+            }
+        }
+    }
+    totalMovements += movements; // ì´ë™ íšŸìˆ˜ í•©ì‚°
+
+    // í‰ê·  ì´ë™ íšŸìˆ˜ ì¶œë ¥
     printf("Bubble Sort Move Average: %d\n", totalMovements / 20);
-    printf("Bubble Sort Result:\n");
-    print_sort(list); // Á¤·Ä °á°ú Ãâ·Â
+    printf("Final Bubble Sort Result (Sorted Array):\n");
+    print_sort(sortedArray); // ìµœì¢… ì •ë ¬ëœ ë°°ì—´ ì¶œë ¥
 }
+
 
 int main() {
     srand(time(0));
     int randomData[SIZE];
 
-    generateRandomData(randomData); 
-    doSelectionSort(randomData);    
-    doInsertionSort(randomData);    
-    doBubbleSort(randomData);       
+    generateRandomData(randomData);
+    doSelectionSort(randomData);
+    doInsertionSort(randomData);
+    doBubbleSort(randomData);
 
     return 0;
 }
