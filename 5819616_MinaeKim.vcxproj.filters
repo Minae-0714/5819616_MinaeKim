@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="12-shellsort.c">
+    <ClCompile Include="13-margesort.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
