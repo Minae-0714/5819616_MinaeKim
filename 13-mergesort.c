@@ -14,15 +14,15 @@ void generaterandomdata(int randomdata[]) {
 }
 
 void printarray(int array[], int size) {
-    for (int i = 0; i < 10; i++) // Ã³À½ 10°³ °ª Ãâ·Â
+    for (int i = 0; i < 10; i++) // ì²˜ìŒ 10ê°œ ê°’ ì¶œë ¥
         printf("%3d ", array[i]);
     printf("| ");
-    for (int i = size / 2 - 1; i < size / 2 + 10 && i < SIZE; i++) // Áß¾Ó-1 ~ Áß¾Ó+10 Ãâ·Â
+    for (int i = size / 2 - 1; i < size / 2 + 10 && i < SIZE; i++) // ì¤‘ì•™-1 ~ ì¤‘ì•™+10 ì¶œë ¥
         printf("%3d ", array[i]);
     printf("\n");
 }
 
-// ÃÖÁ¾ °á°ú Ãâ·Â
+// ìµœì¢… ê²°ê³¼ ì¶œë ¥
 void printallArray(int array[]) {
     for (int i = 0; i < SIZE; i++) {
         printf("%d ", array[i]);
@@ -33,7 +33,7 @@ void printallArray(int array[]) {
 void merge(int list[], int left, int mid, int right, int* comparisonCount, int* moveCount) {
     int i = left, j = mid + 1, k = left;
 
-    // ¿ŞÂÊ, ¿À¸¥ÂÊ ºñ±³ÇÏ¸é¼­ º´ÇÕ ¹× Á¤·Ä
+    // ì™¼ìª½, ì˜¤ë¥¸ìª½ ë¹„êµí•˜ë©´ì„œ ë³‘í•© ë° ì •ë ¬
     while (i <= mid && j <= right) {
         (*comparisonCount)++;
         if (list[i] <= list[j]) {
@@ -45,25 +45,25 @@ void merge(int list[], int left, int mid, int right, int* comparisonCount, int* 
         (*moveCount)++;
     }
 
-    // ³²Àº ¿ŞÂÊ ¹è¿­ º¹»ç
+    // ë‚¨ì€ ì™¼ìª½ ë°°ì—´ ë³µì‚¬
     while (i <= mid) {
         sorted[k++] = list[i++];
         (*moveCount)++;
     }
 
-    // ³²Àº ¿À¸¥ÂÊ ¹è¿­ º¹»ç
+    // ë‚¨ì€ ì˜¤ë¥¸ìª½ ë°°ì—´ ë³µì‚¬
     while (j <= right) {
         sorted[k++] = list[j++];
         (*moveCount)++;
     }
 
-    // Á¤·ÄµÈ ³»¿ëÀ» ¿ø·¡ ¹è¿­·Î º¹»ç
+    // ì •ë ¬ëœ ë‚´ìš©ì„ ì›ë˜ ë°°ì—´ë¡œ ë³µì‚¬
     for (int l = left; l <= right; l++) {
         list[l] = sorted[l];
         (*moveCount)++;
     }
 
-    // 10¹ø¿¡ ÇÑ ¹ø¾¿ Ãâ·Â
+    // 10ë²ˆì— í•œ ë²ˆì”© ì¶œë ¥
     round++;
     if (round % 10 == 0&& isfirst==0) {
         printarray(list, SIZE);
@@ -71,15 +71,15 @@ void merge(int list[], int left, int mid, int right, int* comparisonCount, int* 
     }
 }
 
-// ÇÕº´ Á¤·Ä ÇÔ¼ö
+// í•©ë³‘ ì •ë ¬ í•¨ìˆ˜
 void merge_sort(int list[], int size, int* comparisonCount, int* moveCount) {
-    for (int width = 1; width < size; width *= 2) { // ´Ü°èÀûÀ¸·Î º´ÇÕ Å©±â¸¦ Áõ°¡
-        for (int i = 0; i < size; i += 2 * width) { // ÇöÀç Å©±â¸¸Å­ ³ª´®
-            int left = i; // ½ÃÀÛ
-            int mid = i + width - 1; // Áß°£
-            int right = i + 2 * width - 1 < size ? i + 2 * width - 1 : size - 1; // ³¡
+    for (int width = 1; width < size; width *= 2) { // ë‹¨ê³„ì ìœ¼ë¡œ ë³‘í•© í¬ê¸°ë¥¼ ì¦ê°€
+        for (int i = 0; i < size; i += 2 * width) { // í˜„ì¬ í¬ê¸°ë§Œí¼ ë‚˜ëˆ”
+            int left = i; // ì‹œì‘
+            int mid = i + width - 1; // ì¤‘ê°„
+            int right = i + 2 * width - 1 < size ? i + 2 * width - 1 : size - 1; // ë
 
-            if (mid < size) { // À¯È¿ÇÑ ¹üÀ§ÀÏ °æ¿ì º´ÇÕ
+            if (mid < size) { // ìœ íš¨í•œ ë²”ìœ„ì¼ ê²½ìš° ë³‘í•©
                 merge(list, left, mid, right, comparisonCount, moveCount);
             }
         }
@@ -96,7 +96,7 @@ int main() {
         int comparisonCount = 0;
         int moveCount = 0;
 
-        if (i == 0) { // Ã¹ ¹øÂ° ½ÇÇà
+        if (i == 0) { // ì²« ë²ˆì§¸ ì‹¤í–‰
             printf("Merge Sort Run\n");
             merge_sort(array, SIZE, &comparisonCount, &moveCount);
 
@@ -105,7 +105,7 @@ int main() {
             isfirst++;
         }
         else { 
-            round = 0; // ¶ó¿îµå ÃÊ±âÈ­
+            round = 0; // ë¼ìš´ë“œ ì´ˆê¸°í™”
             merge_sort(array, SIZE, &comparisonCount, &moveCount);
         }
 
