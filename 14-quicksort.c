@@ -5,10 +5,12 @@
 
 #define SWAP(x,y,t)((t)=(x),(x)=(y), (y)=(t))
 
-int totalMoves = 0;
+int totalMoveCount = 0;
 int totalComparisons = 0;
-int round = 0;
+int rounds = 0;
 int isFirst = 0;
+int comparisonCount;
+int moveCount;
 
 void generateRandomData(int randomData[]) {
 	for (int i = 0; i < SIZE; i++) {
@@ -16,7 +18,23 @@ void generateRandomData(int randomData[]) {
 	}
 }
 
-int partition(int list[], int left, int right) {
+void printarray(int array[]) {
+	if (rounds % 10 == 0 && isFirst == 0) {
+		for (int i = 40; i < 60; i++) // 처음 10개 값 출력
+			printf("%d ", array[i]);
+		printf("\n\n");
+	}
+    rounds++;
+}
+
+void printArray(int array[], int size) {
+	for (int i = 0; i < size; i++) {
+		printf("%d ", array[i]);
+	}
+	printf("\n");
+}
+
+/*int partition(int list[], int left, int right) {
 	int pivot = list[right]; // 피벗을 배열의 마지막 요소로 설정
 	int i = left - 1; // 피벗보다 작은 요소의 마지막 인덱스
 
@@ -47,24 +65,64 @@ void doQuickSort(int list[], int left, int right) {
 		doQuickSort(list, left, q - 1);
 		doQuickSort(list, q + 1, right);
 	}
+}*/ // 재귀적인 방법
+
+int partition(int list[], int left, int right) {
+    int pivot = list[right]; // 피벗을 마지막 요소로 설정
+    int i = left - 1; // 피벗보다 작은 요소의 마지막 인덱스
+
+    for (int j = left; j < right; j++) {
+        comparisonCount++; // 비교 횟수 증가
+        if (list[j] <= pivot) { // 피벗보다 작은 경우
+            i++;
+            // list[i]와 list[j] 교환
+            int temp = list[i];
+            list[i] = list[j];
+            list[j] = temp;
+            moveCount += 3; // 교환 작업: 3번의 이동 발생
+        }
+    }
+
+    // 피벗을 적절한 위치로 이동
+    int temp = list[i + 1];
+    list[i + 1] = list[right];
+    list[right] = temp;
+    moveCount += 3; // 교환 작업: 3번의 이동 발생
+
+    printarray(list);
+    return i + 1; // 피벗의 최종 위치 반환
 }
 
-void printallArray(int array[]) {
-	for (int i = 0; i < SIZE; i++) {
-		printf("%d ", array[i]);
-	}
-	printf("\n");
-}
+// 반복적으로 퀵소트를 수행합니다.
+void doQuickSort(int list[], int left, int right) {
+    int stack[SIZE];
+    int top = -1;
 
-void printArray(int array[], int size) {
-	if (round % 10 == 0 && isFirst == 0) { // 10번에 한 번만 출력
-		for (int i = 0; i < 10; i++) // 0 ~ 9값
-			printf("%3d ", array[i]);
-		printf("| ");
-		for (int i = SIZE / 2 - 1; i < SIZE / 2 + 10; i++) // 중앙-1 ~ 중앙+10
-			printf("%3d ", array[i]);
-		printf("\n\n");
-	}
+    // 초기 구간을 스택에 삽입
+    stack[++top] = left;
+    stack[++top] = right;
+
+    while (top >= 0) {
+        // 스택에서 구간을 꺼냅니다.
+        right = stack[top--];
+        left = stack[top--];
+
+        // 분할 작업 수행
+        int pivot = partition(list, left, right);
+		printarray(list);
+
+        // 피벗 기준으로 오른쪽 구간을 스택에 삽입
+        if (pivot + 1 < right) {
+            stack[++top] = pivot + 1;
+            stack[++top] = right;
+        }
+
+        // 피벗 기준으로 왼쪽 구간을 스택에 삽입
+        if (pivot - 1 > left) {
+            stack[++top] = left;
+            stack[++top] = pivot - 1;
+        }
+    }
 }
 
 int main(int argc, char *argv[]) {
@@ -73,21 +131,26 @@ int main(int argc, char *argv[]) {
 
 	for (int i = 0; i < 20; i++) {
 		generateRandomData(array);
+		comparisonCount = 0;
+		moveCount = 0;
+
 		if (i == 0) {
 			printf("Quick Sort Run\n");
 			doQuickSort(array, 0, SIZE - 1);
 
 			printf("Result\n");
-			printallArray(array);
+			printArray(array, SIZE);
+            isFirst++;
 		}
 		else {
 			doQuickSort(array, 0, SIZE - 1);
 		}
-
+        totalComparisons += comparisonCount;
+        totalMoveCount += moveCount;
 	}
 
 	printf("\nAverage Comparisons: %.2f\n", totalComparisons / 20.0);
-	printf("Average Moves: %.2f\n", totalMoves / 20.0);
+	printf("Average Moves: %.2f\n", totalMoveCount / 20.0);
 
 	return 0;
 }

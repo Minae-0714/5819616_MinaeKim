@@ -9,7 +9,7 @@ int round = 0, isfirst = 0;
 
 void generaterandomdata(int randomdata[]) {
     for (int i = 0; i < SIZE; i++) {
-        randomdata[i] = rand() % 1000; 
+        randomdata[i] = rand() % 1000;
     }
 }
 
@@ -65,7 +65,7 @@ void merge(int list[], int left, int mid, int right, int* comparisonCount, int* 
 
     // 10번에 한 번씩 출력
     round++;
-    if (round % 10 == 0&& isfirst==0) {
+    if (round % 10 == 0 && isfirst == 0) {
         printarray(list, SIZE);
         printf("\n");
     }
@@ -104,7 +104,7 @@ int main() {
             printallArray(array);
             isfirst++;
         }
-        else { 
+        else {
             round = 0; // 라운드 초기화
             merge_sort(array, SIZE, &comparisonCount, &moveCount);
         }
