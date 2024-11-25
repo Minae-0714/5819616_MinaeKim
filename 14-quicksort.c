@@ -12,21 +12,24 @@ int isFirst = 0;
 int comparisonCount;
 int moveCount;
 
+// ëœë¤ ë°°ì—´ ìƒì„±
 void generateRandomData(int randomData[]) {
 	for (int i = 0; i < SIZE; i++) {
 		randomData[i] = rand() % 1000;
 	}
 }
 
+// ë°°ì—´ ì¤‘ê°„ ê°’ ì¶œë ¥
 void printarray(int array[]) {
 	if (rounds % 10 == 0 && isFirst == 0) {
-		for (int i = 40; i < 60; i++) // Ã³À½ 10°³ °ª Ãâ·Â
+		for (int i = 40; i < 60; i++) // 40 ~ 60 ìœ„ì¹˜ì— ìˆëŠ” ê°’ ì¶œë ¥
 			printf("%d ", array[i]);
 		printf("\n\n");
 	}
     rounds++;
 }
 
+// ëª¨ë“  ë°°ì—´ ì¶œë ¥
 void printArray(int array[], int size) {
 	for (int i = 0; i < size; i++) {
 		printf("%d ", array[i]);
@@ -35,28 +38,28 @@ void printArray(int array[], int size) {
 }
 
 /*int partition(int list[], int left, int right) {
-	int pivot = list[right]; // ÇÇ¹şÀ» ¹è¿­ÀÇ ¸¶Áö¸· ¿ä¼Ò·Î ¼³Á¤
-	int i = left - 1; // ÇÇ¹şº¸´Ù ÀÛÀº ¿ä¼ÒÀÇ ¸¶Áö¸· ÀÎµ¦½º
+	int pivot = list[right]; // í”¼ë²—ì„ ë°°ì—´ì˜ ë§ˆì§€ë§‰ ìš”ì†Œë¡œ ì„¤ì •
+	int i = left - 1; // í”¼ë²—ë³´ë‹¤ ì‘ì€ ìš”ì†Œì˜ ë§ˆì§€ë§‰ ì¸ë±ìŠ¤
 
 	for (int j = left; j < right; j++) {
-		totalComparisons++; // ºñ±³ È½¼ö Áõ°¡
-		if (list[j] <= pivot) { // ÇÇ¹şº¸´Ù ÀÛÀº °æ¿ì
+		totalComparisons++; // ë¹„êµ íšŸìˆ˜ ì¦ê°€
+		if (list[j] <= pivot) { // í”¼ë²—ë³´ë‹¤ ì‘ì€ ê²½ìš°
 			i++;
-			// list[i]¿Í list[j] ±³È¯
+			// list[i]ì™€ list[j] êµí™˜
 			int temp = list[i];
 			list[i] = list[j];
 			list[j] = temp;
-			totalMoves += 3; // ±³È¯ ÀÛ¾÷: 3¹øÀÇ ÀÌµ¿ ¹ß»ı
+			totalMoves += 3; // êµí™˜ ì‘ì—…: 3ë²ˆì˜ ì´ë™ ë°œìƒ
 		}
 	}
 
-	// ÇÇ¹şÀ» ÀûÀıÇÑ À§Ä¡·Î ÀÌµ¿
+	// í”¼ë²—ì„ ì ì ˆí•œ ìœ„ì¹˜ë¡œ ì´ë™
 	int temp = list[i + 1];
 	list[i + 1] = list[right];
 	list[right] = temp;
-	totalMoves += 3; // ±³È¯ ÀÛ¾÷: 3¹øÀÇ ÀÌµ¿ ¹ß»ı
+	totalMoves += 3; // êµí™˜ ì‘ì—…: 3ë²ˆì˜ ì´ë™ ë°œìƒ
 
-	return i + 1; // ÇÇ¹şÀÇ ÃÖÁ¾ À§Ä¡ ¹İÈ¯
+	return i + 1; // í”¼ë²—ì˜ ìµœì¢… ìœ„ì¹˜ ë°˜í™˜
 }
 
 void doQuickSort(int list[], int left, int right) {
@@ -65,59 +68,59 @@ void doQuickSort(int list[], int left, int right) {
 		doQuickSort(list, left, q - 1);
 		doQuickSort(list, q + 1, right);
 	}
-}*/ // Àç±ÍÀûÀÎ ¹æ¹ı
+}*/ // ì¬ê·€ì ì¸ ë°©ë²•
 
 int partition(int list[], int left, int right) {
-    int pivot = list[right]; // ÇÇ¹şÀ» ¸¶Áö¸· ¿ä¼Ò·Î ¼³Á¤
-    int i = left - 1; // ÇÇ¹şº¸´Ù ÀÛÀº ¿ä¼ÒÀÇ ¸¶Áö¸· ÀÎµ¦½º
+    int pivot = list[right]; // í”¼ë²—ì„ ë§ˆì§€ë§‰ ìš”ì†Œë¡œ ì„¤ì •
+    int i = left - 1; // í”¼ë²—ë³´ë‹¤ ì‘ì€ ìš”ì†Œì˜ ë§ˆì§€ë§‰ ì¸ë±ìŠ¤
 
     for (int j = left; j < right; j++) {
-        comparisonCount++; // ºñ±³ È½¼ö Áõ°¡
-        if (list[j] <= pivot) { // ÇÇ¹şº¸´Ù ÀÛÀº °æ¿ì
+        comparisonCount++; // ë¹„êµ íšŸìˆ˜ ì¦ê°€
+        if (list[j] <= pivot) { // í”¼ë²—ë³´ë‹¤ ì‘ì€ ê²½ìš°
             i++;
-            // list[i]¿Í list[j] ±³È¯
+            // list[i]ì™€ list[j] êµí™˜
             int temp = list[i];
             list[i] = list[j];
             list[j] = temp;
-            moveCount += 3; // ±³È¯ ÀÛ¾÷: 3¹øÀÇ ÀÌµ¿ ¹ß»ı
+            moveCount += 3; // êµí™˜ ì‘ì—…: 3ë²ˆì˜ ì´ë™ ë°œìƒ
         }
     }
 
-    // ÇÇ¹şÀ» ÀûÀıÇÑ À§Ä¡·Î ÀÌµ¿
+    // í”¼ë²—ì„ ì ì ˆí•œ ìœ„ì¹˜ë¡œ ì´ë™
     int temp = list[i + 1];
     list[i + 1] = list[right];
     list[right] = temp;
-    moveCount += 3; // ±³È¯ ÀÛ¾÷: 3¹øÀÇ ÀÌµ¿ ¹ß»ı
+    moveCount += 3; // êµí™˜ ì‘ì—…: 3ë²ˆì˜ ì´ë™ ë°œìƒ
 
     printarray(list);
-    return i + 1; // ÇÇ¹şÀÇ ÃÖÁ¾ À§Ä¡ ¹İÈ¯
+    return i + 1; // í”¼ë²—ì˜ ìµœì¢… ìœ„ì¹˜ ë°˜í™˜
 }
 
-// ¹İº¹ÀûÀ¸·Î Äü¼ÒÆ®¸¦ ¼öÇàÇÕ´Ï´Ù.
+// ë°˜ë³µì ì¸ Quick Sort
 void doQuickSort(int list[], int left, int right) {
     int stack[SIZE];
     int top = -1;
 
-    // ÃÊ±â ±¸°£À» ½ºÅÃ¿¡ »ğÀÔ
+    // ì´ˆê¸° êµ¬ê°„ì„ ìŠ¤íƒì— ì‚½ì…
     stack[++top] = left;
     stack[++top] = right;
 
     while (top >= 0) {
-        // ½ºÅÃ¿¡¼­ ±¸°£À» ²¨³À´Ï´Ù.
+        // ìŠ¤íƒì—ì„œ êµ¬ê°„ì„ êº¼ëƒ…ë‹ˆë‹¤.
         right = stack[top--];
         left = stack[top--];
 
-        // ºĞÇÒ ÀÛ¾÷ ¼öÇà
+        // ë¶„í•  ì‘ì—… ìˆ˜í–‰
         int pivot = partition(list, left, right);
 		printarray(list);
 
-        // ÇÇ¹ş ±âÁØÀ¸·Î ¿À¸¥ÂÊ ±¸°£À» ½ºÅÃ¿¡ »ğÀÔ
+        // í”¼ë²— ê¸°ì¤€ìœ¼ë¡œ ì˜¤ë¥¸ìª½ êµ¬ê°„ì„ ìŠ¤íƒì— ì‚½ì…
         if (pivot + 1 < right) {
             stack[++top] = pivot + 1;
             stack[++top] = right;
         }
 
-        // ÇÇ¹ş ±âÁØÀ¸·Î ¿ŞÂÊ ±¸°£À» ½ºÅÃ¿¡ »ğÀÔ
+        // í”¼ë²— ê¸°ì¤€ìœ¼ë¡œ ì™¼ìª½ êµ¬ê°„ì„ ìŠ¤íƒì— ì‚½ì…
         if (pivot - 1 > left) {
             stack[++top] = left;
             stack[++top] = pivot - 1;
@@ -125,6 +128,7 @@ void doQuickSort(int list[], int left, int right) {
     }
 }
 
+// ë©”ì¸í•¨ìˆ˜
 int main(int argc, char *argv[]) {
 	srand(time(NULL));
 	int array[SIZE];
