@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="14-quicksort.c">
+    <ClCompile Include="15-compareSearches.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

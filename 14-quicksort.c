@@ -12,21 +12,24 @@ int isFirst = 0;
 int comparisonCount;
 int moveCount;
 
+// 랜덤 배열 생성
 void generateRandomData(int randomData[]) {
 	for (int i = 0; i < SIZE; i++) {
 		randomData[i] = rand() % 1000;
 	}
 }
 
+// 배열 중간 값 출력
 void printarray(int array[]) {
 	if (rounds % 10 == 0 && isFirst == 0) {
-		for (int i = 40; i < 60; i++) // 처음 10개 값 출력
+		for (int i = 40; i < 60; i++) // 40 ~ 60 위치에 있는 값 출력
 			printf("%d ", array[i]);
 		printf("\n\n");
 	}
     rounds++;
 }
 
+// 모든 배열 출력
 void printArray(int array[], int size) {
 	for (int i = 0; i < size; i++) {
 		printf("%d ", array[i]);
@@ -93,7 +96,7 @@ int partition(int list[], int left, int right) {
     return i + 1; // 피벗의 최종 위치 반환
 }
 
-// 반복적으로 퀵소트를 수행합니다.
+// 반복적인 Quick Sort
 void doQuickSort(int list[], int left, int right) {
     int stack[SIZE];
     int top = -1;
@@ -125,6 +128,7 @@ void doQuickSort(int list[], int left, int right) {
     }
 }
 
+// 메인함수
 int main(int argc, char *argv[]) {
 	srand(time(NULL));
 	int array[SIZE];

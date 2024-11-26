@@ -6,15 +6,19 @@
 int sorted[SIZE];
 int totalMoves = 0, totalComparisons = 0;
 int round = 0, isfirst = 0;
+int comparisonCount = 0;
+int moveCount = 0;
 
+// 랜덤 배열 생성
 void generaterandomdata(int randomdata[]) {
     for (int i = 0; i < SIZE; i++) {
         randomdata[i] = rand() % 1000;
     }
 }
 
+// 처음 10개 값 출력
 void printarray(int array[], int size) {
-    for (int i = 0; i < 10; i++) // 처음 10개 값 출력
+    for (int i = 0; i < 10; i++) // 처음 10개 값
         printf("%3d ", array[i]);
     printf("| ");
     for (int i = size / 2 - 1; i < size / 2 + 10 && i < SIZE; i++) // 중앙-1 ~ 중앙+10 출력
@@ -23,8 +27,8 @@ void printarray(int array[], int size) {
 }
 
 // 최종 결과 출력
-void printallArray(int array[]) {
-    for (int i = 0; i < SIZE; i++) {
+void printArray(int array[], int size) {
+    for (int i = 0; i < size; i++) {
         printf("%d ", array[i]);
     }
     printf("\n");
@@ -72,7 +76,7 @@ void merge(int list[], int left, int mid, int right, int* comparisonCount, int* 
 }
 
 // 합병 정렬 함수
-void merge_sort(int list[], int size, int* comparisonCount, int* moveCount) {
+void doMergeSort(int list[], int size, int* comparisonCount, int* moveCount) {
     for (int width = 1; width < size; width *= 2) { // 단계적으로 병합 크기를 증가
         for (int i = 0; i < size; i += 2 * width) { // 현재 크기만큼 나눔
             int left = i; // 시작
@@ -93,20 +97,20 @@ int main() {
     for (int i = 0; i < 20; i++) {
         generaterandomdata(array);
 
-        int comparisonCount = 0;
-        int moveCount = 0;
+        comparisonCount = 0;
+        moveCount = 0;
 
         if (i == 0) { // 첫 번째 실행
             printf("Merge Sort Run\n");
-            merge_sort(array, SIZE, &comparisonCount, &moveCount);
+            doMergeSort(array, SIZE, &comparisonCount, &moveCount);
 
             printf("\nResult:\n");
-            printallArray(array);
+            printArray(array, SIZE);
             isfirst++;
         }
         else {
             round = 0; // 라운드 초기화
-            merge_sort(array, SIZE, &comparisonCount, &moveCount);
+            doMergeSort(array, SIZE, &comparisonCount, &moveCount);
         }
 
         totalComparisons += comparisonCount;
