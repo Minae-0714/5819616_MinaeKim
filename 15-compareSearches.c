@@ -7,72 +7,72 @@
 int totalComparisons = 0;
 int compareCount = 0;
 
-// ·£´ı ¹è¿­ »ı¼º
+// ëœë¤ ë°°ì—´ ìƒì„±
 void generateRandomArray(int randomData[]) {
 	for (int i = 0; i < SIZE; i++) {
 		randomData[i] = rand() % 1000;
 	}
 }
 
-// ¹è¿­ Ãâ·Â
+// ë°°ì—´ ì¶œë ¥
 void printArray(int* array) {
 	printf("Array Sorting Result:\n");
-	for (int i = 0; i < 20; i++) // Ã³À½ 20°³ÀÇ °ª
+	for (int i = 0; i < 20; i++) // ì²˜ìŒ 20ê°œì˜ ê°’
 		printf("%3d ", array[i]);
 	printf("\n");
-	for (int i = SIZE - 20; i < SIZE; i++) // ¸¶Áö¸· 20°³ÀÇ °ª
+	for (int i = SIZE - 20; i < SIZE; i++) // ë§ˆì§€ë§‰ 20ê°œì˜ ê°’
 		printf("%3d ", array[i]);
 	printf("\n");
 }
 
-// ¼±Çü Å½»ö
+// ì„ í˜• íƒìƒ‰
 int linearSearch(int array[], int key) {
 	int comparisons = 0;
-	for (int i = 0; i < SIZE; i++) { // ¹è¿­¿¡¼­ ÁÖ¾îÁø key°ª Ã£°í
+	for (int i = 0; i < SIZE; i++) { // ë°°ì—´ì—ì„œ ì£¼ì–´ì§„ keyê°’ ì°¾ê³ 
 		comparisons++;
 		if (array[i] == key) {
-			return comparisons; // ºñ±³È½¼ö ¹İÈ¯
+			return comparisons; // ë¹„êµíšŸìˆ˜ ë°˜í™˜
 		}
 	}
 }
 
-// ¼±Çü Å½»ö 100¹ø ¼öÇà ÈÄ Æò±Õ ºñ±³ È½¼ö ¹İÈ¯
+// ì„ í˜• íƒìƒ‰ 100ë²ˆ ìˆ˜í–‰ í›„ í‰ê·  ë¹„êµ íšŸìˆ˜ ë°˜í™˜
 float getAverageLinearSearchCompareCount(int array[]) {
     int totalComparisons = 0;
     
-    for (int i = 0; i < 100; i++) { // ¼±Çü Å½»ö 100¹ø ¼öÇà
+    for (int i = 0; i < 100; i++) { // ì„ í˜• íƒìƒ‰ 100ë²ˆ ìˆ˜í–‰
         int randomIndex = rand() % SIZE;  
         int randomKey = array[randomIndex];
         totalComparisons += linearSearch(array, randomKey); 
     }
     
-    return totalComparisons / 100.0; // ºñ±³ È½¼ö ¹İÈ¯
+    return totalComparisons / 100.0; // ë¹„êµ íšŸìˆ˜ ë°˜í™˜
 }
 
-// Äü Á¤·Ä¿¡¼­ »ç¿ëµÇ´Â ÆÄÆ¼¼Ç ÇÔ¼ö (¹è¿­À» ÇÇ¹şÀ» ±âÁØÀ¸·Î µÎ ºÎºĞÀ¸·Î ³ª´©°í, ÇÇ¹şÀ» ÀûÀıÇÑ À§Ä¡·Î ÀÌµ¿)
+// í€µ ì •ë ¬ì—ì„œ ì‚¬ìš©ë˜ëŠ” íŒŒí‹°ì…˜ í•¨ìˆ˜ (ë°°ì—´ì„ í”¼ë²—ì„ ê¸°ì¤€ìœ¼ë¡œ ë‘ ë¶€ë¶„ìœ¼ë¡œ ë‚˜ëˆ„ê³ , í”¼ë²—ì„ ì ì ˆí•œ ìœ„ì¹˜ë¡œ ì´ë™)
 int partition(int list[], int left, int right) {
 	int pivot = list[right];
 	int i = left - 1;
 
 	for (int j = left; j < right; j++) {
 		compareCount++; 
-		if (list[j] <= pivot) { // ÇöÀç °ªÀÌ ÇÇ¹şº¸´Ù ÀÛ°Å³ª °°À¸¸é
-			i++; // ÇÇ¹şº¸´Ù ÀÛÀº °ª
+		if (list[j] <= pivot) { // í˜„ì¬ ê°’ì´ í”¼ë²—ë³´ë‹¤ ì‘ê±°ë‚˜ ê°™ìœ¼ë©´
+			i++; // í”¼ë²—ë³´ë‹¤ ì‘ì€ ê°’
 			int temp = list[i];
 			list[i] = list[j];
 			list[j] = temp; // SWAP
 		}
 	}
 
-	// ÇÇ¹şÀ» ¿Ã¹Ù¸¥ À§Ä¡·Î ÀÌµ¿
+	// í”¼ë²—ì„ ì˜¬ë°”ë¥¸ ìœ„ì¹˜ë¡œ ì´ë™
 	int temp = list[i + 1];
 	list[i + 1] = list[right];
 	list[right] = temp;
 
-	return i + 1; // ÇÇ¹şÀÇ ÃÖÁ¾ À§Ä¡ ¹İÈ¯
+	return i + 1; // í”¼ë²—ì˜ ìµœì¢… ìœ„ì¹˜ ë°˜í™˜
 }
 
-// Äü Á¤·Ä ÇÔ¼ö
+// í€µ ì •ë ¬ í•¨ìˆ˜
 void doQuickSort(int list[], int left, int right) {
 	if (left < right) {
 		int q = partition(list, left, right);
@@ -81,10 +81,10 @@ void doQuickSort(int list[], int left, int right) {
 	}
 }
 
-// ÀÌÁø Å½»ö
+// ì´ì§„ íƒìƒ‰
 int binarySearch(int array[], int key) {
 	int low = 0, high = SIZE - 1, comparisons = 0;
-	while (low <= high) { // ÁÖ¾îÁø key °ª Ã£±â
+	while (low <= high) { // ì£¼ì–´ì§„ key ê°’ ì°¾ê¸°
 		comparisons++;
 		int mid = low + (high - low) / 2;
 		if (array[mid] == key)
@@ -94,21 +94,20 @@ int binarySearch(int array[], int key) {
 		else
 			high = mid - 1;
 	}
-	return comparisons; // ºñ±³ È½¼ö ¹İÈ¯
+	return comparisons; // ë¹„êµ íšŸìˆ˜ ë°˜í™˜
 }
 
-// ÀÌÁø Å½»ö 100È¸ ¼öÇà, Æò±Õ ºñ±³ È½¼ö ¹İÈ¯
+// ì´ì§„ íƒìƒ‰ 100íšŒ ìˆ˜í–‰, í‰ê·  ë¹„êµ íšŸìˆ˜ ë°˜í™˜
 float getAverageBinarySearchCompareCount(int array[]) {
 	int totalComparisons = 0;
-	for (int i = 0; i < 100; i++) {
-		int randomIndex = rand() % SIZE; // ¹è¿­¿¡¼­ ·£´ı °ª ¼±ÅÃ
-		int randomKey = array[randomIndex];
-		totalComparisons += binarySearch(array, randomKey); // ÀÌÁø Å½»ö ÈÄ ºñ±³ È½¼ö ÇÕ»ê
+	for (int i = 0; i < 100; i++) { 
+		int target = array[rand() % SIZE]; // ë°°ì—´ì—ì„œ ëœë¤ ê°’ ì„ íƒ
+		totalComparisons += binarySearch(array, target); // ì´ì§„ íƒìƒ‰ í›„ ë¹„êµ íšŸìˆ˜ í•©ì‚°
 	}
-	return totalComparisons / 100.0; // Æò±Õ ºñ±³ È½¼ö ¹İÈ¯
+	return totalComparisons / 100.0; // í‰ê·  ë¹„êµ íšŸìˆ˜ ë°˜í™˜
 }
 
-// Äü Á¤·Ä ¼öÇà, ºñ±³ È½¼ö ±â·Ï
+// í€µ ì •ë ¬ ìˆ˜í–‰, ë¹„êµ íšŸìˆ˜ ê¸°ë¡
 void getQuickSortCompareCount(int array[]) {
 	compareCount = 0;
 	doQuickSort(array, 0, SIZE - 1); 
@@ -120,15 +119,15 @@ int main(int argc, char* argv[]) {
 
 	generateRandomArray(array);
 
-	//Æò±Õ°ªÀ» ¹İÈ¯¹Ş±â À§ÇÑ Á¶Ä¡
+	//í‰ê· ê°’ì„ ë°˜í™˜ë°›ê¸° ìœ„í•œ ì¡°ì¹˜
 	printf("Average Linear Search Compare Count: %.2f\n", getAverageLinearSearchCompareCount(array));
 	
-	//compareCount°¡ global variavbleÀÌ¹Ç·Î, ´ÙÀ½°ú °°ÀÌ ±¸Çö
-	//array¿¡ ´ëÇØ¼­ Á÷Á¢ Á¤·ÄÇÏ¸é µÊ
+	//compareCountê°€ global variavbleì´ë¯€ë¡œ, ë‹¤ìŒê³¼ ê°™ì´ êµ¬í˜„
+	//arrayì— ëŒ€í•´ì„œ ì§ì ‘ ì •ë ¬í•˜ë©´ ë¨
 	getQuickSortCompareCount(array);
 	printf("Quick Sort Compare Count: %d\n", compareCount);
 
-	//Á¤·ÄµÈ Array¿¡ ´ëÇØ¼­ Binary Search 100È¸ ¼öÇà ¹× Æò±Õ ºñ±³È½¼ö Ãâ·Â
+	//ì •ë ¬ëœ Arrayì— ëŒ€í•´ì„œ Binary Search 100íšŒ ìˆ˜í–‰ ë° í‰ê·  ë¹„êµíšŸìˆ˜ ì¶œë ¥
 	printf("Average Binary Search Compare Count: %.2f\n\n", getAverageBinarySearchCompareCount(array));
 	printArray(array);
 
