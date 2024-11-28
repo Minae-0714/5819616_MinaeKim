@@ -144,7 +144,7 @@ int main(int argc, char *argv[]) {
 
 			printf("Result\n");
 			printArray(array, SIZE);
-            isFirst++;
+            		isFirst++;
 		}
 		else {
 			doQuickSort(array, 0, SIZE - 1);
