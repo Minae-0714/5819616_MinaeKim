@@ -100,10 +100,9 @@ int binarySearch(int array[], int key) {
 // 이진 탐색 100회 수행, 평균 비교 횟수 반환
 float getAverageBinarySearchCompareCount(int array[]) {
 	int totalComparisons = 0;
-	for (int i = 0; i < 100; i++) {
-		int randomIndex = rand() % SIZE; // 배열에서 랜덤 값 선택
-		int randomKey = array[randomIndex];
-		totalComparisons += binarySearch(array, randomKey); // 이진 탐색 후 비교 횟수 합산
+	for (int i = 0; i < 100; i++) { 
+		int target = array[rand() % SIZE]; // 배열에서 랜덤 값 선택
+		totalComparisons += binarySearch(array, target); // 이진 탐색 후 비교 횟수 합산
 	}
 	return totalComparisons / 100.0; // 평균 비교 횟수 반환
 }
