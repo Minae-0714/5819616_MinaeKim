@@ -1,7 +1,7 @@
 # Interpolation Search {Result Image}
-![](/16-interpolationSearches(1).png)
-![](/16-interpolationSearches(2).png)
-![](/16-interpolationSearches(3).png)
+![](/16-interpolationSearch(1).png)
+![](/16-interpolationSearch(2).png)
+![](/16-interpolationSearch(3).png)
 
 ---
 
