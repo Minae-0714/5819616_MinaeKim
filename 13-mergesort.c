@@ -76,19 +76,18 @@ void merge(int list[], int left, int mid, int right, int* comparisonCount, int* 
 }
 
 // 합병 정렬 함수
-void doMergeSort(int list[], int size, int* comparisonCount, int* moveCount) {
-    for (int width = 1; width < size; width *= 2) { // 단계적으로 병합 크기를 증가
-        for (int i = 0; i < size; i += 2 * width) { // 현재 크기만큼 나눔
-            int left = i; // 시작
-            int mid = i + width - 1; // 중간
-            int right = i + 2 * width - 1 < size ? i + 2 * width - 1 : size - 1; // 끝
+void doMergeSort(int list[], int left, int right) {
+    int size = right - left + 1; // 배열의 전체 크기
 
-            if (mid < size) { // 유효한 범위일 경우 병합
-                merge(list, left, mid, right, comparisonCount, moveCount);
-            }
+    for (int width = 1; width < size; width *= 2) { // 병합 크기를 1, 2, 4, ...로 증가
+        for (int i = left; i + width <= right; i += 2 * width) { // 현재 크기로 병합
+            int mid = i + width - 1; // 중간 지점
+            int end = (i + 2 * width - 1 < right) ? i + 2 * width - 1 : right; // 오른쪽 끝 지점
+            merge(list, i, mid, end, &comparisonCount, &moveCount);
         }
     }
 }
+
 
 int main() {
     int array[SIZE];
@@ -100,17 +99,16 @@ int main() {
         comparisonCount = 0;
         moveCount = 0;
 
-        if (i == 0) { // 첫 번째 실행
+        if (i == 0) { 
             printf("Merge Sort Run\n");
-            doMergeSort(array, SIZE, &comparisonCount, &moveCount);
+            doMergeSort(array, 0, SIZE-1);
 
             printf("\nResult:\n");
             printArray(array, SIZE);
             isfirst++;
         }
         else {
-            round = 0; // 라운드 초기화
-            doMergeSort(array, SIZE, &comparisonCount, &moveCount);
+            doMergeSort(array, 0, SIZE-1);
         }
 
         totalComparisons += comparisonCount;
