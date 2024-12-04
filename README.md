@@ -7,7 +7,7 @@
 
 # 결과 분석 
 ### ▪ Interpolation Search가 Binary Search보다 적게 비교하는 이유를 설명
-**Interpolation Search**
+**Interpolation Search**   
 데이터가 균일하게 분포되어 있을 때, 예상 위치를 계산하여 검색
 
 ![](/interpolation.png)
@@ -20,7 +20,7 @@
 보간탐색은 평균적으로 O(log N)의 시간 복잡도를 보인다.
 데이터가 균일하게 분포된 경우에 매우 효율적입니다.
 
-**Binary Search**
+**Binary Search**  
 배열의 중간 위치를 기준으로 탐색
 
 정렬된 배열에서 중간 요소를 확인한 뒤, 목표값과 비교해 탐색 범위를 절반으로 줄이는 과정이다.
